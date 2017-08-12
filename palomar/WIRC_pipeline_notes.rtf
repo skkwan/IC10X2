@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 /data/dcook \
+./wirc.csh\
+Input date: 20160718\
+Which flats: null (archival flats)\
+show (group header files)\
+/data/dcook/WIRC/logs  (.list files)\
+120.list = J-band imaging\
+Filter:, First pass: y, common astro: n, final stacks: n[\'85.]\
+Takes all the images, make some assumptions about dithering, determines the sky subtraction, builds sky frames from images taken close enough together in time, flat-fields, mosaics everything, does astrometry, and calculate (hopefully) zero points from 2MASS sources with known JHK magnitudes to relate counts to magnitudes\
+/data/dcook/WIC/redux/20160718/120/J/ (I don\'92t have permission to views this)\
+/skies = data products. \
+ls *mos.fits \
+fs_mask_j_1.tile.mos.fits has the first-pass image of interest \
+Second pass: /data/dcook/ \
+./wirc.ssh, enter date, null for flats, 120.list for objects, 120.list for skys (typically ok to give the same for both), J band, perform first pass? n, solution: y, final stacks: y, #2 to combine all observations in a single filter for a single night\
+120_20160718 should contain the final flats\
+First pass is in /SKYS, second pass in TARGETS/}

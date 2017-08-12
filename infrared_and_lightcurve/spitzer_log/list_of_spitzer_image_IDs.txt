@@ -1,0 +1,16 @@
+1. Go to the Spitzer Heritage Archive (http://sha.ipac.caltech.edu/applications/Spitzer/SHA/) and search for "IC 10 X-2" (the name of the source). You can click on the "more options" to filter for only the IRAC data.
+
+2. Click the level 2 (PBCD) tab--it will show you IRAC images. Note: there will be some in red that are still proprietary (they are part of Martha's survey, so we can grab these from her later)
+
+Observations that cover IC 10 X-2:
+(1) r4424960 2004-07-23
+(2) r33204224 2010-01-29
+(3) r33203968 2010-02-19
+(4) r33203456 2010-03-10
+(5) r33204224 2010-09-09
+(6) r33202432 2010-10-04
+(7) r33201920 2010-10-14
+(8) r42321152 2011-09-24
+(9) r42321408 2012-04-04
+(10) r52576256 2015-03-11
+(11) r52577280 2016-03-23

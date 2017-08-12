@@ -1,0 +1,137 @@
+\documentclass{article}
+
+\usepackage{fancyhdr, graphicx, amssymb, caption, gensymb, subcaption, titlesec, wasysym, titling, wrapfig, booktabs}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[top=1in, bottom=0.5in, left=1in, right=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{setspace} \singlespacing %\onehalfspacing \singlespacing % %\doublespacing %\setstretch{1.1}
+\graphicspath{{./figs/}}
+\DeclareGraphicsExtensions{.png}
+\setlength{\droptitle}{-6em}
+\title{Studying the Mid-IR Counterpart of IC 10 X-2: A Supergiant High-Mass X-Ray Binary} 
+\author{}
+\date{}
+\titleformat{\section}
+  {\normalfont\bf}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{Stephanie Kwan (Mentors: Professor Mansi Kasliwal, Dr. Ryan Lau, Jacob Jencson)}
+\chead{}
+\rhead{\thepage}
+\maketitle  \vspace{-21ex}
+\thispagestyle{fancy}
+\section{Scientific justification}
+
+\vspace{-1ex}
+\textbf{High-mass X-ray Binaries.}
+X-ray emitting binary systems typically consist of a compact object, such as a neutron star (NS) or black hole, that accretes matter from its companion ``donor'' star. The companion is a either low-mass star with spectral type later than B, called Low-Mass X-ray Binaries, or a luminous early spectral type OB high-mass star ($> 10 M_{\astrosun}$), called High-Mass X-ray Binaries (HMXBs) (Chaty 2011). The compact object of HMXBs can accrete through one of three processes: (i) accretion at periapse from circumstellar disks around an emission-line B (Be) donor star, (ii) Roche lobe overflow from a supergiant donor, or (iii) supergiant stellar winds (Chaty 2014). The latter two usually host NS orbiting early spectral type supergiant OB donor stars, and are referred to as supergiant HMXBs (sgHMXB). SgHMXB, particularly X-ray wind-accreting sgHMXB, have recently been discovered at a high rate compared to BeHMXBs. New sgHMXB population studies have revealed further subclasses, presenting opportunities for valuable insight into X-ray binary formation and evolution.
+
+\noindent\textbf{Supergiant Fast X-Ray Transients (SFXTs).} A subclass of newly discovered sgHMXBs are SFXTs, which are unusually fast transient outbursts rising in tens of minutes and lasting for several hours or days (Negueruela et. al 2006). Since SFXT outbursts are inconsistent with orbital motion of the compact star through a smooth medium, the predominant explanation is that the compact star interacts with dense clumpy stellar wind. In this model, the compact object exhibits low-level quiescent emission from accreting dilute medium between clumps. How the SFXT clumpy stellar wind model relates to regular HMXB accretion remains an active area of research.
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+	\vspace{-2ex}
+	\includegraphics[width=0.4\textwidth]{"160707 Both channel lightcurve IC 10 X-2".png}
+	\caption{Optical spectrum of IC 10 X-2 from Laycock et. al (2014). Inset shows H$\alpha$ and H$\beta$ blueshift from radial velocity.}
+	\label{fig:Laycock IC 10 X-2 optical spectrum}
+\end{wrapfigure}
+
+\noindent\textbf{IR counterparts to HMXBs.}
+IR observations have found warm dust outflows from some sgHMXB, opening the question of how these outflows interact with the compact companion and influence X-ray emission. Lau et. al (2016) report an IR counterpart to the HMXB ``SN'' 2010da, discovered in the SPitzer InfraRed Intensive Transient Survey (SPIRITS). They challenge the leading interpretation of ``SN'' 2010da as an eruption from a luminous blue variable HMXB, using IR and optical observations to argue that it is instead a supergiant (sg)B[e]-HMXB. Their claim was motivated by the coincidence of the mid-IR and X-ray outbursts, and the time evolution of the dust properties such as temperature, mass, and luminosity.
+
+\noindent\textbf{IC 10 X-2: a new HMXB.} Another HMXB, IC 10 X-2, was discovered in the dwarf starburst galaxy IC 10 as a large-amplitude X-ray transient. Based on optical observations, Laycock et. al (2014) classified the optical counterpart of IC 10 X-2 as a luminous blue supergiant exhibiting the B[e]-phenomenon, which is characterized by forbidden Fe emission lines, and significant outflows, found from the large equivalent width of H$\alpha$. An optical spectrum from the paper is shown in Figure \ref{fig:Laycock IC 10 X-2 optical spectrum}. 
+\begin{wrapfigure}[15]{l}{0.4\textwidth}
+  \vspace{-3ex}
+  \includegraphics[width=\linewidth]{"160707 Both channel lightcurve IC 10 X-2 cropped".png}
+  \vspace{-5ex}
+  \caption{IRAC Ch 1 $3.6\mu m$ and Ch 2 $4.5 \mu m$ background-corrected flux of IC 10 X-2 (in mJy). The fluxes decreased by half shortly before the 2010 X-ray outburst (dashed line).}
+  \label{fig:IC 10 X-2 IRAC flux}
+\end{wrapfigure}
+% 8.45455 Contrast, 1.01287 Bias, 200 and 400 contrast
+
+
+We have discovered that IC 10 X-2 has an IR counterpart that was not reported by Laycock et. al (2014). To follow up on these findings, a side project of this SURF started with performing basic background-subtraction photometry on 3.6$\mu$m and 4.5$\mu$m images from Spitzer archival data. Figure \ref{fig:IC 10 X-2 IRAC flux} shows the decrease in fluxes by a factor of 2. Based on the coincidence of the X-ray and mid-IR light curves, we hypothesize that IC 10 X-2 shares similar properties as ``SN'' 2010da.
+
+\noindent\textbf{Objectives.} We therefore propose a near-IR study of IC 10 X-2, with a primary objective of using the TripleSpec to take spectra. The spectra will reveal near-IR emission lines unhindered by dust extinction from the system, thus complementing the optical spectrum of Laycock et. al (2014). With the spectral resolution of TripleSpec (R $\approx$ 3000), we expect to resolve the Br$\gamma$ (2.17$\mu$m) line in the K-band, which will indicate any changes in the outflow velocities as previously revealed by the H$\alpha$ measurements from Laycock et. al (2014). Additionally we aim to identify the [Fe II] (1.64$\mu$m) emission line in the H-band to further verify the spectral classification of the star as a B[e] star.  
+% note to self: r is the spectral resolution: 
+The secondary objective is to use WIRC to acquire near-IR photometric measurements to fully sample the IR spectral energy distribution, complementing recent mid-IR observations performed in the Dust in Nearby Galaxies with Spitzer (DUSTiNGS) survey (PI: Martha L. Boyer). Photometry from WIRC will also provide an absolute flux calibration for the TripleSpec spectra, which is important because IC 10 X-2 exhibits variability in the IR. 
+
+\vspace{-2ex}
+\section{Feasibility calculations}
+Here we show feasibility calculations for the TripleSpec and WIRC instruments. We request a total of two hours for our program: 1 hr for Triplespec and 1 hr for WIRC. 
+
+\begin{wraptable}{l}{10cm}
+	\vspace{-2ex}
+	\caption{A0V standards closest to IC 10 X-2.}
+	\label{A0V standards}
+	\begin{tabular}{|c|c|c|c|c|}
+	\hline
+Distance (deg) & HIP    & RA (J2000)  & Dec         & V$_\textrm{mag}$ \\ \hline
+3.5            & 582    & 00:07:05.49 & +62:23:33.7 & 9.52  \\ \hline
+3.5            & 1383   & 00:17:18.74 & +62:49:33.1 & 8.56  \\ \hline
+4.0            & 117450 & 23:48:53.97 & +59:58:44.3 & 6.33  \\ \hline
+4.3            & 942    & 00:11:37.46 & +63:26:35.2 & 9.21  \\ \hline
+	\end{tabular}
+\end{wraptable}
+
+\vspace{0ex}
+\noindent\textbf{Object visibility.} IC 10 X-2 (0h20m20.940s, +59d17m59.00s) will be visible above 40$\degree$ (1.55 airmass) after 1:00 AM PDT on July 18th, rising to 60$\degree$ (1.1 airmass) at 4:00 AM. 
+
+\begin{wrapfigure}{l}{0.3\textwidth}
+  \vspace{-2ex}
+  \includegraphics[width=\linewidth]{"IC 10 X-2 Kband image with markers".png}
+  \caption{A 2MASS K-band image of IC 10 X-2, containing the 1''x30'' slit at a 60$\degree$ position angle, centered at IC 10 X-2. North and East are indicated on the compass.}
+  \label{fig:IC 10 X-2 TripleSpec slit orientation}
+\end{wrapfigure}
+
+
+\noindent \textbf{Standard A0V stars.}
+The Gemini Telluric Standard Search lists four A0V stars nearest to the object (Table \ref{A0V standards}).
+
+
+\noindent\textbf{Field of view.} 
+We looked at a September 2000 K$_s$-band image from the Two Micron All Star Survey (2MASS) to determine optimal TripleSpec slit alignment for reducing contamination from other extended sources. As shown in Figure \ref{fig:IC 10 X-2 TripleSpec slit orientation}, we chose to orient the slit at a position angle of 60$\degree$.
+WIRC's field of view will cover the entire IC 10 galaxy, so in order to accurately subtract sky background and avoid using the camera's lower-quality upper left quadrant, we will use a SPIRITS pre-configured dither script for observing the galaxy with extended emission.  
+
+\vspace{1ex}
+\noindent \textbf{Sensitivity and integration time.}
+2MASS reports the object's apparent magnitudes to be \textbf{m = 15.4 in the H-band and m = 15.5 in the K-band}. We calculate the integration time in each band needed to achieve a signal-to-noise ratio (S/N) of 10, using the TripleSpec Cookbook's sensitivity values. S/N is proportional to the square root of integration time, and is reduced by a factor of $\sqrt{2}$ to account for background subtraction. This gives TripleSpec exposure time of \textit{5.8 minutes in the H-band} and \textit{27.9 minutes in the K-band}.
+
+% t = 60 sec * 2 coadds * (S/N / reference S/N)^2 * 2 for background subtraction * (1 / 10^((mag - 15)/-2.5)) * (1min/60seconds)
+
+The WIRC spec sheet gives a S/N of 5 for one hour of integration time for a $m = 22.0$ star in the J filter, and the same for a $m = 20.6$ star in the K$_s$ filter. IC 10 X-2 is 150 times brighter in the J filter and 3.63 times brighter in the K$_s$ filter. To achieve a S/N of 10, the integration time is divided by the square root of the brightness ratio times two (to account for background subtraction). This gives integration times of \textit{4.05 minutes for the J filter} and \textit{22.3 minutes for the K$_s$ filter}. No sensitivities were given for the H filter in the spec sheet, but we expect a required integration time of \textit{5 minutes for the H filter}, giving a total of 40 minutes on WIRC.
+
+%the requisite integration time on WIRC can be decreased by $\sqrt{\frac{1}{150 * 2}}$ and  $\sqrt{\frac{1}{3.63 * 2}}$. 
+
+\noindent \textbf{Time allocation.} Thus we propose one hour total time for TripleSpec measurements, including overhead time for dithers/nods between frames, observing the standard star, and a possible instrument switch. In addition, we request one hour of WIRC time, including overheads such as dithers and filter changes.
+
+\noindent \textbf{Additional comments.}
+We expect to use the SPIRITS pipeline for reducing WIRC data. Dr. Ryan Lau (SURF mentor) has used Palomar TripleSpec extensively and will provide guidance on spectra analysis. 
+
+%==================================%
+%| Bibliography 				   |
+%==================================%
+%\begin{center}
+%\rule{450pt}{1pt}
+%\end{center}
+\vspace{-1ex}
+\begin{thebibliography}{9}
+\bibitem{Chaty 2011}
+	Chaty, S. 2011, arXiv:1107.0231 [astro-ph.HE], ASP conference series.
+\vspace{-2ex}
+\bibitem{Chaty 2014}
+	Chaty, S. 2014, ASR, 52, 12, p. 2132-2142.
+\vspace{-2ex}
+\bibitem{Lau 2016}
+	Lau, R., Kasliwal, M., Bond, E., Smith, N., et al. 2016, arXiv:1605.06750v1 [astro-ph.SR], submitted to ApJ on May 6th 2016.
+\vspace{-2ex}
+\bibitem{Laycock 2014}
+	Laycock, S., Cappallo, R., Oram, K., Balchunas, A. 2014, ApJ, 789, 64.
+\vspace{-2ex}
+\bibitem{Negueruela 2006}
+	Negueruela, I., Smith, D. M., Reig, P., Chaty, S., Torrejon, J. M. 2006, Proceedings of The X-ray Universe 2005.
+
+\end{thebibliography}
+\end{document}

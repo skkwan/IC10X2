@@ -1,0 +1,11 @@
+# Region file format: DS9 version 4.1
+global color=green dashlist=8 3 width=1 font="helvetica 10 normal roman" select=1 highlite=1 dash=0 fixed=0 edit=1 move=1 delete=1 include=1 source=1
+fk5
+circle(0:20:20.940,+59:17:59.00,3") # color=magenta text={IC 10 X-2}; annulus(0:20:20.940,+59:17:59.00,5",10") # dash = 1 color = magenta
+circle(0:20:20.366,+59:16:56.39,3") # text={H: 12.995 +- 0.041}; annulus(0:20:20.366,+59:16:56.39,5",10") # text={} dash = 1
+circle(0:20:13.313,+59:16:42.93,3") # text={H mag: 13.044 +- 0.035}; annulus(0:20:13.313,+59:16:42.93,5",10") # dash = 1
+circle(0:20:03.398,+59:16:50.61,3") # text={H mag: 12.934 +- 0.028}; annulus(0:20:03.398,+59:16:50.61,5",10") # dash = 1
+circle(0:20:09.625,+59:17:19.35,3") # text={H mag: 13.149 +- 0.038}; annulus(0:20:09.625,+59:17:19.35,5",10") # dash =1
+circle(0:20:28.312,+59:19:23.13,3") # text={H mag: 13.870 +- 0.042}; annulus(0:20:28.312,+59:19:23.13,5",10") # dash =1
+circle(0:20:16.684,+59:19:20.65,3") # text={H mag: 13.071 +- 0.030}; annulus(0:20:16.684,+59:19:20.65,5",10") # dash =1
+circle(0:20:12.428,+59:18:25.99,3") # text={H mag: 11.902 +- 0.031}; annulus(0:20:12.428,+59:18:25.99,5",10") # dash =1
