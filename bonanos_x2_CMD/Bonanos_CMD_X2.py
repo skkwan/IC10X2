@@ -126,7 +126,7 @@ edgecolorlist = 'White', 'None', 'k', 'darkgrey', 'k', 'k', 'k',\
 catnames = 'O stars', 'Early B', 'Late B', 'AFG/comp', 'RSG', 'WR','sgB[e]', 'LBV',\
            'Be-Xray'
 linewidthlist = 0.3, 0.3, 0.3, 0.3, 0.3, 0.5, 0.3, 0.3, 1
-sizelist = 20, 10, 20, 30, 12, 12, 25, 30, 45
+sizelist = 30, 10, 20, 30, 12, 12, 25, 30, 35
 # Plot results
 fig, ax = plt.subplots()
 plt.hold(True)
@@ -145,7 +145,8 @@ minorLocatory = MultipleLocator(1)
 ax.xaxis.set_minor_locator(minorLocatorx)
 ax.yaxis.set_minor_locator(minorLocatory)
 
-plt.legend(loc='lower right',fontsize = 10, scatterpoints = 1, frameon = False)
+plt.legend(loc='lower right', fontsize = 12, scatterpoints = 1,
+           frameon = True, markerscale = 1.3)
 plt.xlabel('m$_{[3.6]}$ - m$_{[4.5]}$', fontsize = 14)
 plt.ylabel('M$_{[3.6]}$', fontsize = 14)
 
@@ -179,8 +180,8 @@ cb.ax.invert_yaxis()
 
 # Make a zoomed inset: zoom-factor, location: upper center
 axins = zoomed_inset_axes(ax, 3, loc = 1) 
-ax.set_xlim(-0.5, 3)
-ax.set_ylim(1, -16)
+ax.set_xlim(-0.5, 2.5)
+ax.set_ylim(-1, -13.5)
 plt.gca().invert_yaxis()
 
 for category in (earlyB, Ostar, WR, AFG, RSG, sgB_e, lateB, LBV, BeXray):
@@ -253,4 +254,4 @@ plt.yticks(visible = False)
 plt.xticks(visible = False)
 # position the inset
 mark_inset(ax, axins, loc1 = 2, loc2 = 4, fc = "none", ec = "0.5")
-plt.savefig('170917 Bonanos CMD.pdf')
+plt.savefig('Bonanos CMD.pdf')
