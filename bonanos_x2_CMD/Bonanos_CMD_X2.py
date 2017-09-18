@@ -14,10 +14,9 @@ Source for zoom-in inset plot: http://akuederle.com/matplotlib-zoomed-up-inset
 """
 import numpy as np
 import matplotlib.pyplot as plt
-# import Final_version_fluxes_170201 as flc
-import Fluxes_with_xdates_170314 as flc
+import fluxes_with_xdates_170314_copy as flc
 from math import log10
-from array import *
+#from array import *
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
@@ -32,7 +31,7 @@ f_80, f_80_sig = flc.circFlux80, flc.fluxError80
 jdates   = flc.jdates
 
 # Open the file
-f = 'Bonanos 2010 Table 3/table3_only_Ch1_Ch2.dat'
+f = 'table3_only_Ch1_Ch2.dat'
 ref_mu = 18.91
 dat = np.genfromtxt(f, dtype=(float,float, '|S10'),
                            delimiter   = '\t', 
@@ -167,9 +166,9 @@ for j in range(len(jdates)):
 ic10x2 = plt.scatter(color, abs_Mag36, marker = 'o', c = jdates, 
                      cmap = plt.cm.plasma, linewidth = 0.3, s = 30,
                      edgecolor = 'k')
-sn2010da = plt.scatter(0.76, -10.36, marker = 's', c = 'red', linewidth = 0.3,
-                       s = 35, edgecolor = 'k')  
-ax.text(0.85,-10,'(SN)2010da')                       
+#sn2010da = plt.scatter(0.76, -10.36, marker = 's', c = 'red', linewidth = 0.3,
+#                       s = 35, edgecolor = 'k')  
+#ax.text(0.85,-10,'(SN)2010da')                       
 # Add a colorbar
 cb = plt.colorbar(ic10x2, shrink = 0.6,
                   ticks = [53500, 54375, 55250, 56125, 57000],
@@ -254,4 +253,4 @@ plt.yticks(visible = False)
 plt.xticks(visible = False)
 # position the inset
 mark_inset(ax, axins, loc1 = 2, loc2 = 4, fc = "none", ec = "0.5")
-plt.savefig('170314 Bonanos CMD.pdf')
+plt.savefig('170917 Bonanos CMD.pdf')
