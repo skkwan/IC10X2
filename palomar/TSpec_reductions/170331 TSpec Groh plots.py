@@ -154,11 +154,11 @@ offset = 0.000717
 # LBV/LBV candidate plot
 ###########################################
 min2, max2   = 570, 570 + 394
-ax3.plot(lbv1_wl[min2:max2], lbv1_normFlux[min2:max2]  + 0.4,
+ax3.plot(lbv1_wl[min2:max2], lbv1_normFlux[min2:max2]  + 0.45,
          color = 'grey', linewidth = 0.75)
-ax3.plot(lbv2_wl[434:828], lbv2_normFlux[434:828] + 0.4, '-',
+ax3.plot(lbv2_wl[434:828], lbv2_normFlux[434:828] + 1.6, '-',
          color = 'grey', dashes= (2, 0.4), linewidth = 0.5)
-ax3.plot(lbv3_wl[441:835], lbv3_normFlux[441:835] + 1, color = 'black', linewidth = 0.5)
+ax3.plot(lbv3_wl[441:835], lbv3_normFlux[441:835] + 1.0, color = 'black', linewidth = 0.5)
 ax3.plot(wl[7100:7500] + 0.00064397,
          normFlux[7100:7500], color = 'black') # IC 10 X-2
 ax3.set_yticks(np.arange(0.0, 2.0, 0.5))
