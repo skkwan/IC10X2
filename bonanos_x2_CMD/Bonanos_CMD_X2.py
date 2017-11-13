@@ -16,6 +16,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import fluxes_with_xdates_170314_copy as flc
 from math import log10
+from matplotlib.patches import ConnectionPatch
 #from array import *
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
@@ -33,7 +34,7 @@ jdates   = flc.jdates
 # Open the file
 f = 'table3_only_Ch1_Ch2.dat'
 ref_mu = 18.91
-dat = np.genfromtxt(f, dtype=(float,float, '|S10'),
+dat = np.genfromtxt(f, dtype=(float, float, 'U10'), #|S10
                            delimiter   = '\t', 
                            skip_header = 43,
                            missing_values = '      ',
@@ -129,7 +130,7 @@ linewidthlist = 0.3, 0.3, 0.3, 0.3, 0.3, 0.5, 0.3, 0.3, 1
 sizelist = 30, 10, 20, 30, 12, 12, 25, 30, 35
 # Plot results
 fig, ax = plt.subplots()
-plt.hold(True)
+#plt.hold(True)
 for cat in (earlyB, Ostar, WR, AFG, RSG, sgB_e, lateB, LBV, BeXray):
     ind = cat_list.index(cat)
     ax.scatter(sortColors[ind], sortAbsMag36[ind], c = colors[ind],
@@ -180,8 +181,10 @@ cb.ax.invert_yaxis()
 
 # Make a zoomed inset: zoom-factor, location: upper center
 axins = zoomed_inset_axes(ax, 3, loc = 1) 
-ax.set_xlim(-0.5, 2.5)
-ax.set_ylim(-1, -13.5)
+x1, x2 = -0.5, 2.5
+y1, y2 = -1, -13.5
+ax.set_xlim(x1, x2)
+ax.set_ylim(y1, y2)
 plt.gca().invert_yaxis()
 
 for category in (earlyB, Ostar, WR, AFG, RSG, sgB_e, lateB, LBV, BeXray):
@@ -247,11 +250,16 @@ axins.annotate('11', xy = (color[10], abs_Mag36[10]), xytext = (2,-30),
                 arrowprops=dict(arrowstyle = '->', connectionstyle='arc3,rad=0'))
                 
 #axins.text(0.20, -9.70, 'IC 10 X-2')
-x1, x2, y1, y2 = -0.05, 0.38, -7.75, -9.55
-axins.set_xlim(x1, x2)
-axins.set_ylim(y1, y2)
+insetx1, insetx2, insety1, insety2 = -0.05, 0.38, -7.75, -9.55
+axins.set_xlim(insetx1, insetx2)
+axins.set_ylim(insety1, insety2)
+
+coordsA = "data"
+coordsB = "data"
+line1coords = (1.15, -7.86)
+plt.plot(insetx2, insety1, 1.15, -7.86)
 plt.yticks(visible = False)
 plt.xticks(visible = False)
 # position the inset
-mark_inset(ax, axins, loc1 = 2, loc2 = 4, fc = "none", ec = "0.5")
-plt.savefig('Bonanos CMD.pdf')
+mark_inset(ax, axins, loc1 = 2, loc2 = 3, fc = "none", ec = "0.5")
+plt.savefig('171112 Bonanos CMD.pdf')
