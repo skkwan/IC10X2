@@ -19,7 +19,9 @@ from math import log10
 from matplotlib.patches import ConnectionPatch
 #from array import *
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
-from mpl_toolkits.axes_grid1.inset_locator import mark_inset
+# from mpl_toolkits.axes_grid1.inset_locator import mark_inset
+# Doesn't work with Python 2 anymore :(
+import matplotlib.patches as patches
 plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
 plt.rc('text', usetex = True)
 from matplotlib.ticker import MultipleLocator
@@ -179,13 +181,20 @@ cb.set_label('IC 10 X-2 \n Date (MJD)', y = 1.25, rotation = 0, fontsize = 14)
 cb.ax.xaxis.set_label_position('top')
 cb.ax.invert_yaxis()
 
-# Make a zoomed inset: zoom-factor, location: upper center
-axins = zoomed_inset_axes(ax, 3, loc = 1) 
 x1, x2 = -0.5, 2.5
 y1, y2 = -1, -13.5
 ax.set_xlim(x1, x2)
 ax.set_ylim(y1, y2)
-plt.gca().invert_yaxis()
+insetx1, insetx2, insety1, insety2 = -0.05, 0.38, -7.75, -9.55
+
+# Create a rectangle patch in the original plot
+rect = patches.Rectangle((insetx1, insety1), insetx2 - insetx1, insety2 - insety1,
+                         linewidth = 1, edgecolor = 'k', facecolor = 'none')
+ax.add_patch(rect)
+#plt.gca().invert_yaxis()
+
+# Make a zoomed inset: zoom-factor, location: upper center
+axins = zoomed_inset_axes(ax, 3, loc = 1) 
 
 for category in (earlyB, Ostar, WR, AFG, RSG, sgB_e, lateB, LBV, BeXray):
     ind = cat_list.index(category)
@@ -195,6 +204,7 @@ for category in (earlyB, Ostar, WR, AFG, RSG, sgB_e, lateB, LBV, BeXray):
                   
 axins.scatter(color, abs_Mag36, marker = 'o', c = jdates, cmap = plt.cm.plasma,
               s = 40, linewidth = 0.3, edgecolor = 'k')
+
 
 # Create labels for points in the inset
 labels = ['{0}'.format(i + 1) for i in range(len(jdates))]    
@@ -250,9 +260,9 @@ axins.annotate('11', xy = (color[10], abs_Mag36[10]), xytext = (2,-30),
                 arrowprops=dict(arrowstyle = '->', connectionstyle='arc3,rad=0'))
                 
 #axins.text(0.20, -9.70, 'IC 10 X-2')
-insetx1, insetx2, insety1, insety2 = -0.05, 0.38, -7.75, -9.55
 axins.set_xlim(insetx1, insetx2)
 axins.set_ylim(insety1, insety2)
+
 
 coordsA = "data"
 coordsB = "data"
@@ -260,6 +270,7 @@ line1coords = (1.15, -7.86)
 plt.plot(insetx2, insety1, 1.15, -7.86)
 plt.yticks(visible = False)
 plt.xticks(visible = False)
-# position the inset
-mark_inset(ax, axins, loc1 = 2, loc2 = 3, fc = "none", ec = "0.5")
-plt.savefig('171112 Bonanos CMD.pdf')
+# Mark inset  (commented out since this is broken in Python 2 and 3)
+#mark_inset(ax, axins, loc1 = 2, loc2 = 3, fc = "none", ec = "0.5")
+
+plt.savefig('171116 Bonanos CMD.pdf')
