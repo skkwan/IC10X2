@@ -2,14 +2,11 @@
 """
 Created on Thu Sep  8 13:55:16 2016 as a copy+paste of the previous version of
 this file. For making a journal figure.
-
 Calculate the color and magnitude (3.6 - 4.5 microns) of IC 10 X-2,
 and compare it to the population of massive stars in the LMC with
 IRAC and SAGE measurements.
-
 Source for colormap: http://stackoverflow.com/questions/12965075/matplotlib-sca
 tter-plot-colour-as-function-of-third-variable
-
 Source for zoom-in inset plot: http://akuederle.com/matplotlib-zoomed-up-inset
 """
 import numpy as np
@@ -27,10 +24,8 @@ plt.rc('text', usetex = True)
 from matplotlib.ticker import MultipleLocator
 
 # Rename arrays from photometry calculations
-f_36, f_37_sig = flc.circFlux36, flc.fluxError36
+f_36, f_36_sig = flc.circFlux36, flc.fluxError36
 f_45, f_45_sig = flc.circFlux45, flc.fluxError45
-f_58, f_58_sig = flc.circFlux58, flc.fluxError58
-f_80, f_80_sig = flc.circFlux80, flc.fluxError80
 jdates   = flc.jdates
 
 # Open the file
@@ -148,28 +143,44 @@ minorLocatory = MultipleLocator(1)
 ax.xaxis.set_minor_locator(minorLocatorx)
 ax.yaxis.set_minor_locator(minorLocatory)
 
-plt.legend(loc='lower right', fontsize = 12, scatterpoints = 1,
-           frameon = True, markerscale = 1.3)
+plt.legend(loc='lower right', fontsize = 9, scatterpoints = 1,
+           frameon = True, markerscale = 1.0)
 plt.xlabel('m$_{[3.6]}$ - m$_{[4.5]}$', fontsize = 14)
 plt.ylabel('M$_{[3.6]}$', fontsize = 14)
 
+def mag(flux, zeropt):
+  # flux and zeropt are in Jansky
+  return -2.5 * log10(flux / zeropt)
 
 # Handle the IC 10 X-2 fluxes
 abs_Mag36, abs_Mag45, app_Mag36, app_Mag45, color = np.zeros((5,len(jdates)))
+app_Mag36_sig, app_Mag45_sig, colorsig = np.zeros((3, len(jdates)))
 mu_X2 = 24.1    # Distance modulus of IC 10-X2
 f0_36 = 280.9   # zero-point flux for the 3.6 channel
 f0_45 = 179.7   # zero-point flux for the 4.5 channel
 for j in range(len(jdates)):
-    app_Mag36[j] = -2.5 * log10(f_36[j] * 10**-3 / f0_36)
-    app_Mag45[j] = -2.5 * log10(f_45[j] * 10**-3 / f0_45)
+    app_Mag36[j] = mag(f_36[j] * 10**-3, f0_36)
+    app_Mag45[j] = mag(f_45[j] * 10**-3, f0_45) 
+    # From Mathematica: propagate error: derivative of the abs_Mag36 calculation is
+    app_Mag36_sig[j] = np.abs(f_36_sig[j] * (2.5/np.log(10)) / f_36[j] )
+    app_Mag45_sig[j] = np.abs(f_45_sig[j] * (2.5/np.log(10)) / f_45[j] )
     abs_Mag36[j] = app_Mag36[j] - mu_X2
     abs_Mag45[j] = app_Mag45[j] - mu_X2
     color[j]     = app_Mag36[j] - app_Mag45[j]
+    colorsig[j] = np.sqrt((app_Mag36_sig[j])**2 + (app_Mag45_sig[j])**2)
 
 # Plot IC 10 X-2's journey across the CMD with a colormap
 ic10x2 = plt.scatter(color, abs_Mag36, marker = 'o', c = jdates, 
                      cmap = plt.cm.plasma, linewidth = 0.3, s = 30,
                      edgecolor = 'k')
+ax.errorbar(0.2, -8 , xerr = np.mean(colorsig), yerr = np.mean(app_Mag36_sig),
+            ecolor = 'r', capthick = 1, elinewidth = 1)
+# Error in app_Mag_36 same as for the absolute one 
+#print(np.mean(colorsig))
+#print(np.mean(app_Mag36_sig))
+#for i in range(len(f_36)):
+#  print(mag((f_36[i] + f_36_sig[i]) * 10**-3, f0_36) - mag(f_36[i] * 10**-3, f0_36))
+
 #sn2010da = plt.scatter(0.76, -10.36, marker = 's', c = 'red', linewidth = 0.3,
 #                       s = 35, edgecolor = 'k')  
 #ax.text(0.85,-10,'(SN)2010da')                       
@@ -204,7 +215,9 @@ for category in (earlyB, Ostar, WR, AFG, RSG, sgB_e, lateB, LBV, BeXray):
                   
 axins.scatter(color, abs_Mag36, marker = 'o', c = jdates, cmap = plt.cm.plasma,
               s = 40, linewidth = 0.3, edgecolor = 'k')
-
+# Add error bar to inset
+axins.errorbar(color[0] - np.mean(colorsig), -8.00 , xerr = np.mean(colorsig),
+              yerr = np.mean(app_Mag36_sig), ecolor = 'r', capthick = 1, elinewidth = 1)
 
 # Create labels for points in the inset
 labels = ['{0}'.format(i + 1) for i in range(len(jdates))]    
@@ -268,8 +281,8 @@ coordsA = "data"
 coordsB = "data"
 line1coords = (1.15, -7.86)
 plt.plot(insetx2, insety1, 1.15, -7.86)
-plt.yticks(visible = False)
-plt.xticks(visible = False)
+plt.yticks(visible = True)
+plt.xticks(visible = True)
 # Mark inset  (commented out since this is broken in Python 2 and 3)
 #mark_inset(ax, axins, loc1 = 2, loc2 = 3, fc = "none", ec = "0.5")
 
