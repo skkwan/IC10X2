@@ -26,6 +26,7 @@ fig, ax = plt.subplots()
 
 gs = gridspec.GridSpec(1, 2, width_ratios = [5, 3]) 
 ax = plt.subplot(gs[0])
+
 # Plot IR MAGNITUDE light curves
 plt.scatter(ir.dates2, ir.jMags, facecolors = 'navy', marker = '<', s = 25,
             edgecolors = 'navy', zorder = 3, label = 'J')
@@ -77,7 +78,7 @@ for j in range(len(ir.xnondates)):
 quiesmag36, quiesmag45 = np.mean(ir.m36), np.mean(ir.m45)
 plt.axhline(y = quiesmag36, color = 'black', ls = 'dashed')
 plt.axhline(y = quiesmag45, color = 'grey', ls = 'dashed')
-plt.text(52650, 15.5, 'Quiescent levels', fontsize = 10)
+#plt.text(52650, 15.5, 'Quiescent levels', fontsize = 10)
 
 entirelowerlim = 51500
 entireupperlim = 58100   
@@ -107,7 +108,7 @@ ax.add_patch(
 
 # Plot time of burst and label it
 plt.axvline(x = 55337.8, color = 'k', ls = 'dashed')
-plt.text(55500, 15.6, "2010 May outburst", rotation=90, fontsize=11)
+#plt.text(55500, 15.6, "2010 May outburst", rotation=90, fontsize=11)
  
 
 #################
@@ -182,6 +183,10 @@ plt.axhline(y = np.median(opt.mag2), color = 'k', ls = ':')
 plt.xlim([entirelowerlim, entireupperlim])
 plt.ylim([13.5, 21.0])
 
+
+plt.xlabel('Date (MJD)', fontsize = 14)
+plt.ylabel('Magnitude', fontsize = 14)
+
 # Reverse y axis
 plt.gca().invert_yaxis()
 
@@ -239,9 +244,11 @@ lgd = ax.legend(handles, labels, loc = 'lower left', title = 'Filter/Channel',
 
 plt.xlabel('Date (MJD)', fontsize = 14)
 plt.ylabel('Magnitude', fontsize = 14)
+
+
 plt.tight_layout() 
 plt.show()           
 
-fig.savefig("X2_IR_and_optical_lc_test.pdf", bbox_extra_artists=(lgd,), bbox_inches='tight')
+fig.savefig("X2_IR_and_optical_lc.pdf", bbox_extra_artists=(lgd,), bbox_inches='tight')
 
 
