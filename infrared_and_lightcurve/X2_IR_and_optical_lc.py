@@ -13,6 +13,7 @@ import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes, mark_inset
 from matplotlib import gridspec
+import matplotlib.patches as patches
 
 # Get optical fluxes
 sys.path.insert(0, '../optical')
@@ -189,7 +190,7 @@ plt.gca().invert_yaxis()
 #################
 axins = plt.subplot(gs[1])
 # sub region of the original image
-x1, x2, y1, y2 = 56450, 56700, 17.0, 19.0
+x1, x2, y1, y2 = 56450, 57500, 17.25, 19.7
 axins.set_xlim(x1, x2)
 axins.set_ylim(y1, y2)
 plt.scatter(opt.mag1date, opt.mag1, marker = 'o', s = 2, color = 'black',
@@ -198,7 +199,13 @@ plt.gca().invert_yaxis()
 
 # draw a bbox of the region of the inset axes in the parent axes and
 # connecting lines between the bbox and the inset axes area
-mark_inset(ax, axins, loc1=2, loc2=3, fc="none", ec="0.5")
+# Broken in Python 3 now :(
+#mark_inset(ax, axins, loc1=2, loc2=3, fc="none", ec="0.5")
+
+# Create a rectangle patch in the original plot
+rect = patches.Rectangle((x1, y1), x2 - x1, y2 - y1,
+                         linewidth = 1, edgecolor = 'grey', facecolor = 'none')
+ax.add_patch(rect)
 
 plt.errorbar(opt.mag1date, opt.mag1, yerr = opt.mag1sig, linestyle = 'None',
              color = 'grey', linewidth = 1, zorder = 3)
@@ -235,6 +242,6 @@ plt.ylabel('Magnitude', fontsize = 14)
 plt.tight_layout() 
 plt.show()           
 
-fig.savefig("X2_IR_and_optical_lc.pdf", bbox_extra_artists=(lgd,), bbox_inches='tight')
+fig.savefig("X2_IR_and_optical_lc_test.pdf", bbox_extra_artists=(lgd,), bbox_inches='tight')
 
 

@@ -22,7 +22,7 @@ reference spectra to plot.
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
-
+from matplotlib.ticker import MultipleLocator
 
 plt.rc('text', usetex=True)
 plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
@@ -107,6 +107,8 @@ ax1.plot(wl[7100:7500], normFlux[7100:7500], color = 'black')
 ax1.invert_xaxis()
 ax1.set_xlim([1.075, 1.100])
 ax1.set_ylim([0, 1.9])
+minorLocator = MultipleLocator(0.002) # for subplots
+minorLocator2 = MultipleLocator(0.001)
 
 # Plot and label the original He I line in red
 ax1.axvline(x = 1.08303398, color = 'red', ls = 'dashed')
@@ -118,10 +120,7 @@ ax1.axvline(x = 1.093817, color = 'red', ls = 'dashed')
 ax1.axvline(x = 1.0931, color = 'green', ls = 'dashed')
 ax1.text(1.091, 1.2, 'Pa $\gamma$', rotation = 90, fontsize = 12, color = 'green') 
 
-#################
-# Determine continua emission levels
-ax1.axvline(x = 1.086, color = 'grey')
-ax1.axvline(x = 1.09, color = 'grey')
+ax1.xaxis.set_minor_locator(minorLocator)
 
 #################
 
@@ -154,12 +153,16 @@ ax2.text(1.2786, 1.2, 'Pa $\\beta$', rotation = 90,
 ax2.invert_xaxis()
 ax2.set_xlim([1.270, 1.2939]) 
 ax2.set_ylim([0, 1.9])
+minorLocator
+ax2.xaxis.set_minor_locator(minorLocator2)
 
-offset = 0.000717
 
 ###########################################
 # LBV/LBV candidate plot
 ###########################################
+ax3.text(0.03, 1.3, '\\textbf{(b)}', transform = ax3.transAxes,
+      fontsize = 14, fontweight = 'bold', va = 'top', ha = 'right')
+ax3.set_title('LBV/LBV candidate', fontsize = 14)
 min2, max2   = 570, 570 + 394
 ax3.plot(lbv1_wl[min2:max2], lbv1_normFlux[min2:max2]  + 0.45,
          color = 'grey', linewidth = 0.75)
@@ -168,46 +171,61 @@ ax3.plot(lbv2_wl[434:828], lbv2_normFlux[434:828] + 1.6, '-',
 ax3.plot(lbv3_wl[441:835], lbv3_normFlux[441:835] + 1.0, color = 'black', linewidth = 0.5)
 ax3.plot(wl[7100:7500] + 0.00064397,
          normFlux[7100:7500], color = 'black') # IC 10 X-2
+# Increase frequency of wavelength ticks
+ax3.xaxis.set_minor_locator(minorLocator)
 ax3.set_yticks(np.arange(0.0, 2.0, 0.5))
 ax3.set_xlim([1.075, 1.100])
 ax3.set_ylim([0.0, 2.0])
-ax3.text(0.03, 1.3, '\\textbf{(b)}', transform = ax3.transAxes,
-      fontsize = 14, fontweight = 'bold', va = 'top', ha = 'right')
-ax3.set_title('LBV/LBV candidate', fontsize = 14)
 
 
+###########################################
 # Wolf-Rayet star plot
+###########################################
+
+offset = 0.000717
+
+
+ax4.text(0.03, 1.3, '\\textbf{(c)}', transform = ax4.transAxes,
+      fontsize = 14, fontweight = 'bold', va = 'top', ha = 'right')
+ax4.set_title("WR star", fontsize = 14)     
 min3, max3 = 552, 946
 ax4.plot(wr1_wl[529:924], wr1_normFlux[529:924]+1.2, color = 'black', linewidth = 0.5)
 ax4.plot(wr2_wl[513:908], wr2_normFlux[513:908]+0.0, '-', linewidth = 0.5,
          color = 'grey', dashes=(2, 0.4))
 ax4.plot(wr3_wl[503:898], wr3_normFlux[503:898],color = 'grey', linewidth = 0.75)
-ax4.plot(wl[7100:7500] + offset,
-         normFlux[7100:7500] + 1, color = 'black') # IC 10 X-2
-ax4.set_ylim([0.0, 7.0])
+ax4.plot(wl[7100:7500] + offset, normFlux[7100:7500] + 1, color = 'black') # IC 10 X-2
 ax4.set_xlim([1.075, 1.100])
+ax4.xaxis.set_minor_locator(minorLocator)
+ax4.set_ylim([0.0, 7.0])
 ax4.set_yticks(np.arange(0, 7.0, 2.0))
-ax4.set_title("WR star", fontsize = 14)
-ax4.text(0.03, 1.3, '\\textbf{(c)}', transform = ax4.transAxes,
-      fontsize = 14, fontweight = 'bold', va = 'top', ha = 'right')
-      
+
+###########################################
 # OB star plot
+###########################################
+ax5.text(0.03, 1.3, '\\textbf{(d)}', transform = ax5.transAxes,
+      fontsize = 14, fontweight = 'bold', va = 'top', ha = 'right')
+ax5.set_title('OB star', fontsize = 14) 
+
 ax5.plot(ob1_wl[502:897], ob1_normFlux[502:897] + 0.9, 
          '-', linewidth = 0.5,
          color = 'grey', dashes=(2, 0.4))
 #'-', color = 'grey', dashes = (5, 1))
 ax5.plot(ob2_wl[512:964], ob2_normFlux[512:964] + 1.8, color = 'black', linewidth = 0.5)
 ax5.plot(ob3_wl[570:964], ob3_normFlux[570:964], color = 'grey', linewidth = 0.75 )
-ax5.plot(wl[7100:7500] + offset,
-         normFlux[7100:7500] + 0.5, color = 'black') # IC 10 X-2
-ax5.set_ylim([0.5, 4.0])
-ax5.set_title('OB star', fontsize = 14) 
+ax5.plot(wl[7100:7500] + offset, normFlux[7100:7500] + 0.5, color = 'black') # IC 10 X-2
+
 ax5.set_xlim([1.075, 1.100])
-ax5.text(0.03, 1.3, '\\textbf{(d)}', transform = ax5.transAxes,
-      fontsize = 14, fontweight = 'bold', va = 'top', ha = 'right')
+ax5.xaxis.set_minor_locator(minorLocator)
+ax5.set_ylim([0.5, 4.0])
 ax5.set_yticks(np.arange(0.5, 4.0, 1.0))      
 
-# Be star plot
+###########################################
+# BE star plot
+###########################################
+ax6.text(0.03, 1.3, '\\textbf{(e)}', transform = ax6.transAxes,
+      fontsize = 14, fontweight = 'bold', va = 'top', ha = 'right')
+ax6.set_title('Be star', fontsize = 14)
+
 ax6.plot(be1_wl[529:924], be1_normFlux[529:924] + 1.5,  
          color = 'black', linewidth = 0.5)
 ax6.plot(be2_wl[502:897], be2_normFlux[502:897] + 0.6, '-', linewidth = 0.5,
@@ -215,11 +233,9 @@ ax6.plot(be2_wl[502:897], be2_normFlux[502:897] + 0.6, '-', linewidth = 0.5,
 ax6.plot(be3_wl[502:897], be3_normFlux[502:897], color = 'grey', linewidth = 0.75)
 ax6.plot(wl[7100:7500] + offset,
          normFlux[7100:7500] + 0.5, color = 'black', linewidth = 1.0 ) # IC 10 X-2
-ax6.set_ylim([0.5, 3.4])
 ax6.set_xlim([1.075, 1.100])
-ax6.set_title('Be star', fontsize = 14)
-ax6.text(0.03, 1.3, '\\textbf{(e)}', transform = ax6.transAxes,
-      fontsize = 14, fontweight = 'bold', va = 'top', ha = 'right')
+ax6.xaxis.set_minor_locator(minorLocator)
+ax6.set_ylim([0.5, 3.4])
 ax6.set_yticks(np.arange(0.5, 3.5, 1.0))
 
 # Set common labels
@@ -230,5 +246,5 @@ f.text(0.05, 0.5, 'Flux (arbitrary units)', ha = 'center',
 
 plt.subplots_adjust(wspace = 0.2, hspace= 0.7)
 #plt.tight_layout()
- 
-plt.savefig('171117 TSpec and Groh plot with continuum marked.pdf')    
+  
+plt.savefig('171121 TSpec and Groh plot.pdf')

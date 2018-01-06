@@ -227,8 +227,8 @@ ax2.xaxis.set_minor_locator(minorLocator5)
 ax2.yaxis.set_minor_locator(minorLocator6)
 
 #plt.show()
-plt.tight_layout()
-plt.savefig("170705_Optical_lc.pdf")
+#plt.tight_layout()
+#plt.savefig("170705_Optical_lc.pdf")
 
 
 ######################

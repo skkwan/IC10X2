@@ -202,7 +202,6 @@ insetx1, insetx2, insety1, insety2 = -0.05, 0.38, -7.75, -9.55
 rect = patches.Rectangle((insetx1, insety1), insetx2 - insetx1, insety2 - insety1,
                          linewidth = 1, edgecolor = 'k', facecolor = 'none')
 ax.add_patch(rect)
-#plt.gca().invert_yaxis()
 
 # Make a zoomed inset: zoom-factor, location: upper center
 axins = zoomed_inset_axes(ax, 3, loc = 1) 
