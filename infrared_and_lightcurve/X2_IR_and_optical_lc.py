@@ -69,10 +69,10 @@ plt.scatter(ir.jdates[0], ir.m80, facecolors ='none', edgecolors = 'grey',
             
 # Plot non-detections
 for i in range(len(ir.xdates)):     
-       ax.arrow(ir.xdates[i], 17.1, 0.0, -0.2, head_width = 100, head_length = 0.1,
+       ax.arrow(ir.xdates[i], 17.1, 0.0, -0.2, head_width = 0, head_length = 0,
          fc = 'darkslategrey', ec = 'darkslategrey', linestyle = '-')     
 for j in range(len(ir.xnondates)):
-       ax.arrow(ir.xnondates[j], 17.1, 0.0, -0.2, head_width = 30, head_length = 0.1,
+       ax.arrow(ir.xnondates[j], 17.1, 0.0, -0.2, head_width = 0, head_length = 0,
         fc = 'lightgrey', ec = 'lightgrey', linestyle = '-')            
 # Plot quiescent magnitudes
 quiesmag36, quiesmag45 = np.mean(ir.m36), np.mean(ir.m45)
@@ -117,13 +117,14 @@ plt.axvline(x = 55337.8, color = 'k', ls = 'dashed')
 ax = plt.gca() 
 plt.scatter(opt.mag1date, opt.mag1, marker = 'o', s = 2, color = 'black',
             zorder = 4, label = 'R')
-for i in range(0, len(opt.upperlim1)):          # Upper limits
-    ax.arrow(opt.upperlim1date[i], opt.upperlim1[i],
-              0.0, 0.3, head_width = 20, head_length = 0.15,
-              fc = 'grey', ec = 'grey', linestyle = '-')        
-            
 plt.errorbar(opt.mag1date, opt.mag1, yerr = opt.mag1sig, linestyle = 'None',
              color = 'grey', linewidth = 1, zorder = 3)
+
+for i in range(0, len(opt.upperlim1)):          # Upper limits
+    ax.arrow(opt.upperlim1date[i], opt.upperlim1[i],
+              0.0, 0.3, head_width = 80, head_length = 0.15,
+              fc = 'grey', ec = 'grey', linestyle = '-')        
+       
              
 plt.axhline(y = np.median(opt.mag1), color = 'k', ls = ':')
 
@@ -200,7 +201,14 @@ axins.set_xlim(x1, x2)
 axins.set_ylim(y1, y2)
 plt.scatter(opt.mag1date, opt.mag1, marker = 'o', s = 2, color = 'black',
             zorder = 4)
+plt.errorbar(opt.mag1date, opt.mag1, yerr = opt.mag1sig, linestyle = 'None',
+             color = 'grey', linewidth = 1, zorder = 3)
 plt.gca().invert_yaxis()
+
+plt.scatter(opt.mag2date, opt.mag2, marker = 'o', s = 5, color = 'red',
+            zorder = 3, label = 'g')
+plt.errorbar(opt.mag2date, opt.mag2, yerr = opt.mag2sig, linestyle = 'None', 
+             color = 'grey', zorder = 2)
 
 # draw a bbox of the region of the inset axes in the parent axes and
 # connecting lines between the bbox and the inset axes area
@@ -212,9 +220,7 @@ rect = patches.Rectangle((x1, y1), x2 - x1, y2 - y1,
                          linewidth = 1, edgecolor = 'grey', facecolor = 'none')
 ax.add_patch(rect)
 
-plt.errorbar(opt.mag1date, opt.mag1, yerr = opt.mag1sig, linestyle = 'None',
-             color = 'grey', linewidth = 1, zorder = 3)
-             
+# Plot median line of R band emission            
 plt.axhline(y = np.median(opt.mag1), color = 'k', ls = ':')
 
 # Shaded area to denote uncertainty of median (average of mag1sig)
