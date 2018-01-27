@@ -2,9 +2,7 @@
 """
 Created on Tue Jun  6 14:43:57 2017
 Updated Fri Aug 11 2017 to use github repository directories.
-
 @author: stephaniekwan
-
 Code for producing IR and optical combined light curves for IC 10 X-2.
 """
 import sys
@@ -52,20 +50,29 @@ plt.errorbar(ir.dates2[1], ir.kMags[1], yerr = ir.kmag2sig, linestyle = 'None',
 plt.errorbar(ir.jdates, ir.m36, yerr = ir.m36sig, linestyle = 'None',
              color = 'k', zorder = 2)
 plt.errorbar(ir.jdates, ir.m45, yerr = ir.m45sig, linestyle = 'None',
-             color = 'grey', zorder = 2)
+             color = 'g', zorder = 2)
 plt.errorbar(ir.jdates[0], ir.m58, yerr = ir.m58sig, linestyle = 'None',
-             color = 'grey', zorder = 1)
+             color = 'grey', zorder = 3)
 plt.errorbar(ir.jdates[0], ir.m80, yerr = ir.m80sig, linestyle = 'None',
-             color = 'grey', zorder = 1)             
+             color = 'grey', zorder = 3)             
 # Plot the Spitzer datapoints
-plt.scatter(ir.jdates, ir.m36, color = 'black', marker = 'o', s = 15, 
+plt.scatter(ir.jdates, ir.m36, color = 'black', marker = 'o', s = 8, 
             zorder = 3, label = '3.6')
-plt.scatter(ir.jdates, ir.m45, color = 'grey', marker = 'v', s = 15,
+plt.scatter(ir.jdates, ir.m45, color = 'grey', marker = '^', s = 8,
             zorder = 3, label = '4.5')
 plt.scatter(ir.jdates[0], ir.m58, facecolors = 'none', edgecolors =
              'grey', marker = 'D', s = 22, zorder = 3, label = '5.8')
 plt.scatter(ir.jdates[0], ir.m80, facecolors ='none', edgecolors = 'grey',
             marker = 'o', s = 25, zorder = 3, label = '8.0')
+
+print(ir.jMags)
+print(ir.hMags)
+print(ir.kMags)
+print(ir.jmag1sig)
+print(ir.jmag2sig)
+print(ir.hmag2sig)
+print(ir.kmag2sig)
+
             
 # Plot non-detections
 for i in range(len(ir.xdates)):     
@@ -75,10 +82,16 @@ for j in range(len(ir.xnondates)):
        ax.arrow(ir.xnondates[j], 17.1, 0.0, -0.2, head_width = 0, head_length = 0,
         fc = 'lightgrey', ec = 'lightgrey', linestyle = '-')            
 # Plot quiescent magnitudes
-quiesmag36, quiesmag45 = np.mean(ir.m36), np.mean(ir.m45)
+quiesmag36, quiesmag45 = np.mean(ir.m36[8:11]), np.mean(ir.m45[8:11])
 plt.axhline(y = quiesmag36, color = 'black', ls = 'dashed')
 plt.axhline(y = quiesmag45, color = 'grey', ls = 'dashed')
 #plt.text(52650, 15.5, 'Quiescent levels', fontsize = 10)
+print('Quiescent levels of [3.6] and [4.5] based on most recent four epochs')
+print(quiesmag36, np.average(ir.m36sig[8:11]))
+print(quiesmag45, np.average(ir.m45sig[8:11]))
+print('How many sigma above quiescent level are the first two points?')
+print((ir.m36[0] - quiesmag36)/np.average(ir.m36sig[8:11]))
+print((ir.m45[0] - quiesmag45)/np.average(ir.m45sig[8:11]))
 
 entirelowerlim = 51500
 entireupperlim = 58100   
@@ -87,7 +100,7 @@ ax.add_patch(
     patches.Rectangle(
         (entirelowerlim, quiesmag36 - np.average(ir.m36sig)),  # (x, y)
         entireupperlim - entirelowerlim,   # width 
-        2 * np.average(ir.m36sig),   # height
+        2 * np.average(ir.m36sig[8:11]),   # height
         0.0,                       # angle
         facecolor = 'gainsboro',
         edgecolor = 'none',
@@ -98,7 +111,7 @@ ax.add_patch(
     patches.Rectangle(
         (entirelowerlim, quiesmag45 - np.average(ir.m45sig)),  # (x, y)
         entireupperlim - entirelowerlim,   # width 
-        2 * np.average(ir.m45sig),   # height
+        2 * np.average(ir.m45sig[8:11]),   # height
         0.0,                       # angle
         facecolor = 'lightgrey',
         edgecolor = 'none',
@@ -256,5 +269,3 @@ plt.tight_layout()
 plt.show()           
 
 fig.savefig("X2_IR_and_optical_lc.pdf", bbox_extra_artists=(lgd,), bbox_inches='tight')
-
-
