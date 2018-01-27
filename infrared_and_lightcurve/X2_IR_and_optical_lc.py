@@ -50,7 +50,7 @@ plt.errorbar(ir.dates2[1], ir.kMags[1], yerr = ir.kmag2sig, linestyle = 'None',
 plt.errorbar(ir.jdates, ir.m36, yerr = ir.m36sig, linestyle = 'None',
              color = 'k', zorder = 2)
 plt.errorbar(ir.jdates, ir.m45, yerr = ir.m45sig, linestyle = 'None',
-             color = 'g', zorder = 2)
+             color = 'grey', zorder = 2)
 plt.errorbar(ir.jdates[0], ir.m58, yerr = ir.m58sig, linestyle = 'None',
              color = 'grey', zorder = 3)
 plt.errorbar(ir.jdates[0], ir.m80, yerr = ir.m80sig, linestyle = 'None',
